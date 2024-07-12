@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +11,12 @@
     <div class="container">
         <h2>دروس انتخاب‌شده</h2>
         <ul>
-            <li>
-                {{ selection.course.course_name }} - {{ selection.course.instructor_name }} - {{ selection.course.schedule }}
-                <a href="{% url 'remove_course' selection.id %}">حذف</a>
-            </li>
+            {% for selection in selections %}
+                <li>
+                    {{ selection.course.course_name }} - {{ selection.course.instructor_name }} - {{ selection.course.schedule }}
+                    <a href="{% url 'remove_course' selection.id %}">حذف</a>
+                </li>
+            {% endfor %}
         </ul>
         <a href="{% url 'student_dashboard' %}">بازگشت به لیست دروس</a>
     </div>
