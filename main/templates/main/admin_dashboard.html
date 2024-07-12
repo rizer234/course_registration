@@ -1,0 +1,34 @@
+<!-- main/templates/main/admin_dashboard.html -->
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مدیریت دروس</title>
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>مدیریت دروس</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <label for="course_name">نام درس:</label>
+            <input type="text" id="course_name" name="course_name" required>
+            
+            <label for="instructor_name">نام استاد:</label>
+            <input type="text" id="instructor_name" name="instructor_name" required>
+            
+            <label for="schedule">زمان برگزاری:</label>
+            <input type="text" id="schedule" name="schedule" required>
+            
+            <button type="submit">اضافه کردن درس</button>
+        </form>
+        <h3>دروس موجود</h3>
+        <ul>
+            {% for course in courses %}
+                <li>{{ course.course_name }} - {{ course.instructor_name }} - {{ course.schedule }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

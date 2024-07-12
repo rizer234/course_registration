@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاهده دروس</title>
+    <link rel="stylesheet" href="{% static 'main/styles.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>مشاهده دروس</h2>
+        <form method="GET">
+            <label for="search">جستجو:</label>
+            <input type="text" id="search" name="search" placeholder="نام درس یا نام استاد">
+            <button type="submit">جستجو</button>
+        </form>
+        <h3>لیست دروس</h3>
+        <ul>
+            {% for course in courses %}
+                <li>{{ course.course_name }} - {{ course.instructor_name }} - {{ course.schedule }}
+                    <a href="{% url 'select_course' course.id %}">انتخاب</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <a href="{% url 'selected_courses' %}">مشاهده دروس انتخاب‌شده</a>
+    </div>
+</body>
+</html>
