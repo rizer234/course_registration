@@ -60,19 +60,42 @@ def selected_courses(request):
     return render(request, 'user/selected_courses.html', {'selections': selections})
 
 
+def check_add_course_student(course: Course, student):
+    schedule = course.schedule
+    course_times = []
+    times = schedule.split(' - ')
+    for time in times:
+        course_times.append(time.split(" "))
+
+    selected_courses = Selection.objects.filter(student=student)
+    for crs in selected_courses:
+        times = crs.course.schedule.split(" - ")
+        for time in times:
+            day, turn = time.split(" ")
+            for cheft in course_times:
+                if day == cheft[0] and turn == cheft[1]:
+                    return False
+    return True
+
+
 def select_course(request, course_id):
     user_id = request.session["user_id"]
     user = User.objects.get(pk=user_id)
     
     course = Course.objects.get(pk=course_id)
     
-    new_selection = Selection()
-    new_selection.student = user
-    new_selection.course = course
-    new_selection.save()
-    
-    return render(request, 'user/selected_courses.html', {"selections": [new_selection]})
+    if check_add_course_student(course=course, student=user):
+        new_selection = Selection()
+        new_selection.student = user
+        new_selection.course = course
+        new_selection.save()
+        return render(request, 'user/selected_courses.html', {"selections": [new_selection]})
 
+    else:
+        print("Conflict in selecting")
+        return render(request, 'user/student_dashboard.html', {'courses': Course.objects.all()})
+
+    
 
 def remove_course(request, selection_id):
     selected = Selection.objects.get(pk=selection_id)
