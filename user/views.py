@@ -7,12 +7,6 @@ from .models import Course, Selection
 
 User = get_user_model()
 
-try:
-    admin_manager = User.objects.create_user(username="admin", password="admin123", role="admin")
-    admin_manager.save()
-except Exception as e:
-    pass
-
 
 def login_view(request):
     if request.method == 'POST':
@@ -49,19 +43,6 @@ def register_view(request):
             print("The username is Repetitious")
             return redirect('register')
     return render(request, 'user/register.html')
-
-
-def admin_dashboard(request):
-    if 'user_id' not in request.session or request.session['role'] != 'admin':
-        return redirect('login')
-    if request.method == 'POST':
-        course_name = request.POST['course_name']
-        instructor_name = request.POST['instructor_name']
-        schedule = request.POST['schedule']
-        new_course = Course(course_name=course_name, instructor_name=instructor_name, schedule=schedule)
-        new_course.save()
-    courses = Course.objects.all()
-    return render(request, 'user/admin_dashboard.html', {'courses': courses})
 
 
 def student_dashboard(request):
