@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
+from django.db.utils import IntegrityError
+from django.contrib.auth import get_user_model
 from .models import Course, Selection
+
+User = get_user_model()
 
 def login_view(request):
     if request.method == 'POST':
@@ -20,9 +23,13 @@ def register_view(request):
     if request.method == 'POST':
         username = request.POST['username']
         password = request.POST['password']
-        new_user = User.objects.create_user(username=username, password=password, role='student')
-        new_user.save()
-        return redirect('login')
+        try:
+            new_user = User.objects.create_user(username=username, password=password, role='student')
+            new_user.save()
+            return redirect('login')
+        except IntegrityError:
+            print("The username is Repetitious")
+            return redirect('register')
     return render(request, 'user/register.html')
 
 def admin_dashboard(request):
