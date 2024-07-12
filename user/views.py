@@ -89,7 +89,7 @@ def select_course(request, course_id):
     new_selection.course = course
     new_selection.save()
     
-    return render(request, 'user/selected_courses.html')
+    return render(request, 'user/selected_courses.html', {"selection": new_selection})
 
 
 def remove_course(request, selection_id):

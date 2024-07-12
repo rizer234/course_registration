@@ -11,7 +11,8 @@
     <div class="container">
         <h2>دروس حذف شده</h2>
         <ul>
-            <li>{{ course.course.course_name }} - {{ course.course.instructor_name }} - {{ course.course.schedule }}
+            <li>
+                {{ course.course.course_name }} - {{ course.course.instructor_name }} - {{ course.course.schedule }}
             </li>
         </ul>
         <a href="{% url 'student_dashboard' %}">بازگشت به لیست دروس</a>

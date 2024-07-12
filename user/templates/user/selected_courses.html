@@ -11,11 +11,10 @@
     <div class="container">
         <h2>دروس انتخاب‌شده</h2>
         <ul>
-            {% for selection in selections %}
-                <li>{{ selection.course.course_name }} - {{ selection.course.instructor_name }} - {{ selection.course.schedule }}
-                    <a href="{% url 'remove_course' selection.id %}">حذف</a>
-                </li>
-            {% endfor %}
+            <li>
+                {{ selection.course.course_name }} - {{ selection.course.instructor_name }} - {{ selection.course.schedule }}
+                <a href="{% url 'remove_course' selection.id %}">حذف</a>
+            </li>
         </ul>
         <a href="{% url 'student_dashboard' %}">بازگشت به لیست دروس</a>
     </div>
