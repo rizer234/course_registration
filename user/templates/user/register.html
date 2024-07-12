@@ -1,10 +1,11 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ثبت نام</title>
-    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="{% static 'user/styles.css' %}">
 </head>
 <body>
     <div class="container">
@@ -13,10 +14,6 @@
             {% csrf_token %}
             <label for="username">نام کاربری:</label>
             <input type="text" id="username" name="username" required>
-
-            <span>
-                <br>
-            </span>
             
             <label for="password">رمز عبور:</label>
             <input type="password" id="password" name="password" required>
