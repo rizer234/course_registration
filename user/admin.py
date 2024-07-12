@@ -14,7 +14,12 @@ except Exception as e:
 
 
 def check_addable_course(course_name, proff_name, schedule):
-    pass
+    courses: list[Course] = Course.objects.all()
+    for course in courses:
+        if course_name == course.course_name:
+            if proff_name == course.instructor_name:
+                return False
+    return True
 
 
 def admin_dashboard(request):
@@ -24,9 +29,9 @@ def admin_dashboard(request):
         course_name = request.POST['course_name']
         instructor_name = request.POST['instructor_name']
         schedule = request.POST['schedule']
-        
-        new_course = Course(course_name=course_name, instructor_name=instructor_name, schedule=schedule)
-        new_course.save()
+        if check_addable_course(course_name, instructor_name, schedule):
+            new_course = Course(course_name=course_name, instructor_name=instructor_name, schedule=schedule)
+            new_course.save()
     courses = Course.objects.all()
     return render(request, 'user/admin_dashboard.html', {'courses': courses})
 
