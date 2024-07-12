@@ -1,4 +1,5 @@
 import copy
+from django.db.models import Q
 from django.shortcuts import render, redirect
 from django.db.utils import IntegrityError
 from django.contrib.auth import get_user_model
@@ -97,3 +98,9 @@ def remove_course(request, selection_id):
     b = copy.deepcopy(selected)
     selected.delete()
     return render(request, 'user/removed_course.html', {'course': b})
+
+
+def search_courses(request):
+    query = request.GET.get('search', '')
+    result = Course.objects.filter(Q(course_name__contains=query) | Q(instructor_name__contains=query))
+    return render(request, 'user/search_courses.html', {"courses": result})

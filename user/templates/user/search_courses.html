@@ -4,18 +4,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>مشاهده دروس</title>
+    <title>نتایج جستجو</title>
     <link rel="stylesheet" href="{% static 'user/styles.css' %}">
 </head>
 <body>
     <div class="container">
-        <h2>مشاهده دروس</h2>
-        <form method="GET" action="{% url 'search_courses' %}">
-            <label for="search">جستجو:</label>
-            <input type="text" id="search" name="search" placeholder="نام درس یا نام استاد">
-            <button type="submit">جستجو</button>
-        </form>
-        <h3>لیست دروس</h3>
+        <h2>نتایج جستجو</h2>
         <ul>
             {% for course in courses %}
                 <li>{{ course.course_name }} - {{ course.instructor_name }} - {{ course.schedule }}
@@ -23,7 +17,7 @@
                 </li>
             {% endfor %}
         </ul>
-        <a href="{% url 'selected_courses' %}">مشاهده دروس انتخاب‌شده</a>
+        <a href="{% url 'student_dashboard' %}">بازگشت به لیست دروس</a>
     </div>
 </body>
 </html>
