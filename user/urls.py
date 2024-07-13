@@ -10,4 +10,5 @@ urlpatterns = [
     path('select_courses/<course_id>', views.select_course, name='select_course'),
     path('removed_course/<selection_id>', views.remove_course, name='remove_course'),
     path('search_courses', views.search_courses, name='search_courses'),
+    path('conflict_select_course', views.select_course, name='conflict_select_course'),
 ]

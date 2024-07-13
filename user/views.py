@@ -93,7 +93,7 @@ def select_course(request, course_id):
 
     else:
         print("Conflict in selecting")
-        return render(request, 'user/student_dashboard.html', {'courses': Course.objects.all()})
+        return render(request, 'user/conflict_select_course.html')
 
     
 

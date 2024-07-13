@@ -1,0 +1,17 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خطا</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto mt-10 p-6 bg-white rounded-lg shadow-md max-w-sm">
+        <h2 class="text-2xl font-bold mb-6 text-center">خطا</h2>
+        <p class="mt-4 text-center text-gray-600">زمان درس انتخابی با یکی از درس ها تداخل دارد</p>
+        <a href="{% url 'student_dashboard' %}" class="block mt-4 text-blue-500 hover:underline">بازگشت به لیست دروس</a>
+    </div>
+</body>
+</html>
